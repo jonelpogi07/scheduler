@@ -46,11 +46,10 @@ public class TaskImpl implements TaskService {
                 TaskEntity dependency = dependencyTask.get();
                 if (dependency.getEndDate() != null && dependency.getEndDate().isAfter(latestEndDate)) {
                     latestEndDate = dependency.getEndDate();  // Keep track of the latest endDate
+                    // Set the start date to 1 minute after the latest dependency's end date
+                    task.setStartDate(latestEndDate.plusMinutes(1));
                 }
             }
-
-            // Set the start date to 1 minute after the latest dependency's end date
-            task.setStartDate(latestEndDate.plusMinutes(1));
         }
 
         // Convert TaskDto to TaskEntity and save the task
@@ -136,7 +135,7 @@ public class TaskImpl implements TaskService {
                     Optional<TaskEntity> dependencyTask = taskRepository.findById(dependencyIdLong);
                     if (dependencyTask.isPresent()) {
                         TaskEntity dependency = dependencyTask.get();
-                        if (dependency.getEndDate().isAfter(latestDependencyEndDate)) {
+                        if (dependency.getEndDate() != null && dependency.getEndDate().isAfter(latestDependencyEndDate)) {
                             latestDependencyEndDate = dependency.getEndDate();
                         }
                     } else {
@@ -145,11 +144,11 @@ public class TaskImpl implements TaskService {
                 }
 
                 // Set the start date to the day after the latest dependency end date
-                taskStartDate = latestDependencyEndDate.plusDays(1).withHour(0).withMinute(0).withSecond(0).withNano(0);
+                taskStartDate = latestDependencyEndDate.plusMinutes(1);
             }
 
             // Set the endDate based on the duration (duration 1 = 1 day)
-            LocalDateTime taskEndDate = taskStartDate.plusDays(task.getDuration() - 1).withHour(23).withMinute(59).withSecond(59).withNano(999999999);
+            LocalDateTime taskEndDate = taskStartDate.plusDays(task.getDuration());
 
             // Convert TaskDto to TaskEntity
             TaskEntity taskToAdd = new TaskEntity();

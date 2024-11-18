@@ -1,15 +1,10 @@
 package com.scheduler.scheduler.controller;
 
 import com.scheduler.scheduler.dto.TaskDto;
-import com.scheduler.scheduler.exceptions.TaskExceptions;
 import com.scheduler.scheduler.service.TaskService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static com.scheduler.scheduler.response.responseHandler.createResponse;
 
 @RestController
 @CrossOrigin
