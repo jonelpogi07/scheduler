@@ -6,5 +6,5 @@ CREATE TABLE public.task (
     start_date TIMESTAMP NULL,
     end_date TIMESTAMP NULL,
     dependencies VARCHAR(255) NULL,
-    duration VARCHAR(255)
+    duration INT
 );
