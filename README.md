@@ -2,7 +2,7 @@
 Task planner for projects activity
 
 please use postgresql
-spring.datasource.url=jdbc:postgresql://localhost:5432/sched
+spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
 spring.datasource.username=postgres
 spring.datasource.password=123456
 
