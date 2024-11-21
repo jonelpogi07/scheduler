@@ -32,3 +32,8 @@ endpoints
    "duration": 2
    }
    ]
+5. http://localhost:8080/task/findTask
+   {
+   "name": "TASK-0001",
+   "status": 1
+   }
