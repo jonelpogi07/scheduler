@@ -2,9 +2,27 @@ package com.scheduler.scheduler.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import com.scheduler.scheduler.dto.TaskDto;
 
 @Entity
 @Table(name = "task")
+@SqlResultSetMapping(
+        name = "TaskDtoMapping",
+        classes = @ConstructorResult(
+                targetClass = TaskDto.class,
+                columns = {
+                        @ColumnResult(name = "id", type = Long.class),
+                        @ColumnResult(name = "name", type = String.class),
+                        @ColumnResult(name = "status", type = Integer.class),
+                        @ColumnResult(name = "creation_date", type = LocalDateTime.class),
+                        @ColumnResult(name = "start_date", type = LocalDateTime.class),
+                        @ColumnResult(name = "end_date", type = LocalDateTime.class),
+                        @ColumnResult(name = "dependencies", type = String.class),
+                        @ColumnResult(name = "duration", type = Integer.class)
+                }
+        )
+)
+
 public class TaskEntity {
 
     @Id

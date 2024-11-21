@@ -10,6 +10,8 @@ public interface TaskService {
 
     TaskDto addTask(TaskDto task);
 
+    TaskDto findTask(TaskDto task);
+
     TaskDto updateTaskStatus(TaskDto task);
 
     List<TaskDto> batchAddTask(List<TaskDto> task);

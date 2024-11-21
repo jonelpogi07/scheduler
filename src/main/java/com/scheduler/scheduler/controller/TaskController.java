@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/task")
 public class TaskController {
 
@@ -20,6 +19,11 @@ public class TaskController {
     @PostMapping(value= "/addTask")
     public TaskDto addTask(@RequestBody TaskDto taskDto) {
         return taskService.addTask(taskDto);
+    }
+
+    @GetMapping(value= "/findTask")
+    public TaskDto findTask(@RequestBody TaskDto taskDto) {
+        return taskService.findTask(taskDto);
     }
 
     @PostMapping(value= "/updateTaskStatus")

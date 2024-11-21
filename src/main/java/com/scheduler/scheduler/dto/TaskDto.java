@@ -20,6 +20,16 @@ public class TaskDto {
     public TaskDto() {
     }
 
+    public TaskDto(Long id, String name, int status, LocalDateTime creationDate, LocalDateTime startDate, LocalDateTime endDate, String dependencies, int duration) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.creationDate = creationDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.dependencies = dependencies;
+        this.duration = duration;
+    }
     // Constructor to map from TaskEntity to TaskDto
     public TaskDto(TaskEntity taskEntity) {
         this.id = taskEntity.getId();

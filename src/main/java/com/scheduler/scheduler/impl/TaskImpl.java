@@ -5,6 +5,7 @@ import com.scheduler.scheduler.enums.Enums;
 import com.scheduler.scheduler.exceptionEnums.ExceptionEnums;
 import com.scheduler.scheduler.exceptions.TaskExceptions;
 import com.scheduler.scheduler.repository.TaskRepository;
+import com.scheduler.scheduler.repository.TaskRepositoryCustomImpl;
 import com.scheduler.scheduler.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,9 +19,11 @@ import java.util.stream.Collectors;
 @Repository
 public class TaskImpl implements TaskService {
     private final TaskRepository taskRepository;
+    private final TaskRepositoryCustomImpl taskRepositoryCustomImpl;
     @Autowired
-    public TaskImpl(TaskRepository taskRepository) {
+    public TaskImpl(TaskRepository taskRepository, TaskRepositoryCustomImpl taskRepositoryCustomImpl) {
         this.taskRepository = taskRepository;
+        this.taskRepositoryCustomImpl = taskRepositoryCustomImpl;
     }
 
     @Override
@@ -67,6 +70,11 @@ public class TaskImpl implements TaskService {
         // Set the ID of the task in the DTO and return it
         task.setId(taskTobeAdd.getId());
         return task;
+    }
+
+    @Override
+    public TaskDto findTask(TaskDto task) {
+        return taskRepositoryCustomImpl.findTaskByNameAndStatus(task.getName(), task.getStatus());
     }
 
     @Override
